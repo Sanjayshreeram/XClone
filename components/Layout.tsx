@@ -1,5 +1,6 @@
 import { Children } from "react";
 import Sidebar from "./layout/sidebar";
+import {FollowBar} from "./layout/FollowBar";
 
  
  interface LayoutProps {
@@ -19,6 +20,7 @@ import Sidebar from "./layout/sidebar";
                 {children}
 
                 </div>
+                <FollowBar/>
            
 
                 </div>   
