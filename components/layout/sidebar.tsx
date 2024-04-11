@@ -2,7 +2,7 @@ import React from 'react'
 import { BsBellFill, BsHouseFill } from 'react-icons/bs'
 import { FaUser } from 'react-icons/fa'
 import SidebarLogo from './SidebarLogo'
-import { it } from 'node:test'
+import { BiLogOut } from 'react-icons/bi'
 import SidebarItem from './SidebarItem'
 
 const Sidebar = () => {
@@ -41,6 +41,8 @@ const Sidebar = () => {
 
                     ))
                 }
+
+                <SidebarItem href='/logout' label='Logout' icon={BiLogOut} onclick={()=>console.log('logout')}/>
 
 
             </div>
