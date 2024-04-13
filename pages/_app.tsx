@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return(
 
     <>
-    <Modal isOpen title="Test modal" />
+    {/* <Modal isOpen title="Test modal" actionLabel="Submit" /> */}
       <Layout>
       <Component {...pageProps} />
     </Layout>
