@@ -3,12 +3,14 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import {Modal} from "@/components/Modal";
 import Loginmodal from "@/components/modals/Loginmodal";
+import Registermodal from "@/components/modals/RegisterModal";
 
 export default function App({ Component, pageProps }: AppProps) {
   return(
 
     <>
     {/* <Modal isOpen title="Test modal" actionLabel="Submit" /> */}
+    <Registermodal />
     <Loginmodal />
       <Layout>
       <Component {...pageProps} />

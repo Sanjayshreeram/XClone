@@ -1,15 +1,15 @@
 import React from 'react'
 import { create } from 'zustand'
 
-interface UserLoginModalState {
+interface UserRegitserModalState {
     isOpen:boolean;
     onopen:()=>void;
     onclose:()=>void;
     
 }
-export const UserLoginModal= create<UserLoginModalState>((set)=>({
+export const UserRegitserModal= create<UserRegitserModalState>((set)=>({
 
-  isOpen:false,
+  isOpen:true,
   onopen:()=>set({isOpen:true}),
   onclose:()=>set({isOpen:false}),
 
