@@ -9,6 +9,7 @@ import React from 'react'
  }
 export const Input:React.FC<InputProps> = ({placeholder,value,type,disabled,onChange}) => {
   return (
-    <div>input</div>
+    <input disabled={disabled} onChange={onChange} value={value} type={type} placeholder={placeholder} className='w-full p-4 text-lg bg-black border-2 border-neutral-800 rounded-md outline-none text-white foucs:border-sky-500 focus:border-2 disabled:bg-neutral-900 disabled:opacity-70 disabled:cursor-not-allowed transition' 
+    />
   )
 }
