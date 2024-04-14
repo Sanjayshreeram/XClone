@@ -3,6 +3,9 @@ import { UserRegitserModal } from '../hooks/UserRegisterModal';
 import { UserLoginModal } from '../hooks/UserLoginModal';
 import { Input } from '../input';
 import {Modal} from '@/components/Modal'
+import axios from 'axios';
+import {toast} from 'react-hot-toast';
+import { signIn } from 'next-auth/react';
 
 const RegitserModal = () => {
     const registermodal=UserRegitserModal();
@@ -27,8 +30,16 @@ const RegitserModal = () => {
         {
             setIsLoading(true);
             //todo register and login
-            registermodal.onclose();
 
+             await axios.post('/api/register',{name,username,email,password});
+            registermodal.onclose();
+            setIsLoading(false);
+
+           
+            toast.success('Account Created')
+            signIn('credentials',{email,password})
+            toast.success(' logged in')
+         
 
 
 
@@ -42,7 +53,7 @@ const RegitserModal = () => {
             setIsLoading(false)
         }
 
-    },[registermodal])
+    },[registermodal,email,password,username,name])
 
     const Bodycontent=(
       

@@ -61,7 +61,7 @@ export const Modal:React.FC<ModalProps> = ({isOpen,onClose,onSubmit,title,body,f
       {/* {footer} */}
       <div className='flex flex-col gap-2 p-10 '>
        
-       <Button disabled={disabled} label={actionLabel} secondary fullWdith large onClick={handleSubmit} />
+       <Button disabled={disabled} label={actionLabel}  secondary fullWdith large onClick={handleSubmit} />
        {footer}
       </div>
       

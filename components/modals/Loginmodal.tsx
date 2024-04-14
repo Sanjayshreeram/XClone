@@ -25,6 +25,8 @@ const Loginmodal = () => {
             setIsLoading(true);
             loginmodal.onclose();
 
+            setIsLoading(false);
+
 
         }
         catch(error)

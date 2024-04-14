@@ -4,17 +4,23 @@ import type { AppProps } from "next/app";
 import {Modal} from "@/components/Modal";
 import Loginmodal from "@/components/modals/Loginmodal";
 import Registermodal from "@/components/modals/RegisterModal";
+import { Toaster } from "react-hot-toast";
+import { SessionProvider } from "next-auth/react";
 
 export default function App({ Component, pageProps }: AppProps) {
   return(
 
     <>
     {/* <Modal isOpen title="Test modal" actionLabel="Submit" /> */}
+
+    <SessionProvider session={pageProps.session}>
     <Registermodal />
     <Loginmodal />
       <Layout>
       <Component {...pageProps} />
     </Layout>
+    </SessionProvider>
+    
 
 
     </>
