@@ -14,6 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
     {/* <Modal isOpen title="Test modal" actionLabel="Submit" /> */}
 
     <SessionProvider session={pageProps.session}>
+      <Toaster/>
     <Registermodal />
     <Loginmodal />
       <Layout>
