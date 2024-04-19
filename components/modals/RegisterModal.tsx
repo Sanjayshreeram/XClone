@@ -1,3 +1,4 @@
+
 import React, { useCallback, useState } from 'react'
 import { UserRegitserModal } from '../hooks/UserRegisterModal';
 import { UserLoginModal } from '../hooks/UserLoginModal';
@@ -6,9 +7,12 @@ import {Modal} from '@/components/Modal'
 import axios from 'axios';
 import {toast} from 'react-hot-toast';
 import { signIn } from 'next-auth/react';
+import { usecurrentUser } from '../hooks/UseCurrentUser';
 
 const RegitserModal = () => {
     const registermodal=UserRegitserModal();
+    const {data:currentUser}=usecurrentUser();
+
     const loginmodal=UserLoginModal();
     const [name,setName]=useState(''); //this is the state for the name of the user
     const [username,setUsername]=useState(''); //this is the state for the username of the user
@@ -23,6 +27,13 @@ const RegitserModal = () => {
         loginmodal.onopen();
     }
     ,[registermodal,loginmodal,isLoading])
+
+
+    // if(currentUser)
+    //     {     registermodal.onclose();
+
+    //     }
+    //if the user is already logged in then the register modal will be closed;
 
 
     const onsubmit =useCallback(async()=>{
@@ -63,7 +74,7 @@ const RegitserModal = () => {
             <Input placeholder='Email' onChange={(e)=>setEmail(e.target.value)} value={email} disabled={isLoading}/>
             <Input placeholder='Name' onChange={(e)=>setName(e.target.value)} value={name} disabled={isLoading}/>
             <Input placeholder='Username' onChange={(e)=>setUsername(e.target.value)} value={username} disabled={isLoading}/>
-            <Input placeholder='Password' onChange={(e)=>setPassword(e.target.value)} value={password} disabled={isLoading}/>
+            <Input placeholder='Password' type='password' onChange={(e)=>setPassword(e.target.value)} value={password} disabled={isLoading}/>
         </div>
 
         
