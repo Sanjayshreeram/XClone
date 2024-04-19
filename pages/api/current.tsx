@@ -3,7 +3,7 @@ import serverAuth from "@/libs/serverAuth";
 //this file calls serverauth to get and validate user
 export default async function handler(req:NextApiRequest,res:NextApiResponse)
 {
-    if(req.method !=='GET')
+    if(req.method !='GET')
         {
             return res.status(405).end()
         }
@@ -16,6 +16,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
         }
         catch(error)
         {
+          return res.status(401).end()
 
         }
 

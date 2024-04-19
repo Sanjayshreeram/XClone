@@ -32,13 +32,14 @@ const RegitserModal = () => {
             //todo register and login
 
              await axios.post('/api/register',{name,username,email,password});
-            registermodal.onclose();
-            setIsLoading(false);
+          
+           
 
            
             toast.success('Account Created')
             signIn('credentials',{email,password})
             toast.success(' logged in')
+            registermodal.onclose();
          
 
 
@@ -47,6 +48,7 @@ const RegitserModal = () => {
         catch(error)
         {
             console.log(error)
+            toast.error('something went wrong')
 
         }
         finally{

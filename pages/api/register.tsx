@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 
 export default async function handler(req: NextApiRequest, res: any) {  
-      if(req.method !== 'POST'){
+      if(req.method != 'POST'){
         return res.status(405).json({message:'Method not allowed'})
       }
 
