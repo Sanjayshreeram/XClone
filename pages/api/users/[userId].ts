@@ -1,4 +1,4 @@
-import { error } from "console";
+
 import { NextApiRequest,NextApiResponse } from "next";
 
 
@@ -32,6 +32,11 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse){
                     }
                 )
                 return res.status(200).json({...existingUser,followerscount})
+        }
+
+        catch(error)
+        {
+            return res.status(400).end( )
         }
 
 }
