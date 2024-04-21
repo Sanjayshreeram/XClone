@@ -5,7 +5,7 @@ interface AvatarProps {
 }
 
 
-const Avatar:React.FC<AvatarProps>=({userId,isLarge,hasBorder})=>{
+export const Avatar:React.FC<AvatarProps>=({userId,isLarge,hasBorder})=>{
      
     return (
         <div>
