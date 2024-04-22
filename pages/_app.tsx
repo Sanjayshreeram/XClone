@@ -15,6 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
     <SessionProvider session={pageProps.session}>
       <Toaster/>
+      <Editmodal/>
     <Registermodal />
     <Loginmodal />
       <Layout>
