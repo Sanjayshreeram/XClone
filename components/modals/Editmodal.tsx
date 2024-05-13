@@ -1,12 +1,16 @@
-import { use, useCallback, useEffect } from "react";
+"use client"
+import {  useCallback, useEffect } from "react";
 import { usecurrentUser } from "../hooks/UseCurrentUser";
 import { useUser } from "../hooks/useUser";
 import { UserEditModal } from "../hooks/UserEditModal";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { Modal } from "../Modal";
 
-const Editmodal = () => {   
+export const Editmodal = () => {   
+
+    console.log('Editmodal')
 
     const {data:currentUser}=usecurrentUser();
     const {mutate:mutateFetchUser}=useUser(currentUser?.id);
@@ -35,8 +39,8 @@ const Editmodal = () => {
 
     const onsubmit=useCallback(async ()=>{
         try {
+           
             setIsLoading(true);
-
             await axios.patch('/api/Edit',{
                 name,
                 username,
@@ -46,6 +50,12 @@ const Editmodal = () => {
             }
 
             )
+            mutateFetchUser();
+            toast.success('Updated')
+
+            editmodal.onclose();
+            
+
 
 
         }
@@ -58,11 +68,12 @@ const Editmodal = () => {
             setIsLoading(false);
         }
 
-    },[])
+    },[bio,name,username,coverImage,mutateFetchUser,editmodal])
 
     return (
-        <div>
-            {currentUser?.id}
-        </div>
+        <>
+
+        <Modal disabled={isLoading} isOpen={editmodal.isOpen} title="Edit your Profile" actionLabel="Save" onClose={editmodal.onclose} onSubmit={onsubmit}/>
+        </>
     )
 }

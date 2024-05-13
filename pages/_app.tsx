@@ -6,6 +6,7 @@ import Loginmodal from "@/components/modals/Loginmodal";
 import Registermodal from "@/components/modals/RegisterModal";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
+import {Editmodal} from "@/components/modals/Editmodal";
 
 export default function App({ Component, pageProps }: AppProps) {
   return(
