@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { useUser } from "./hooks/useUser"
 import { useRouter } from "next/router";
 import Image from "next/image";
+import image from '@/image.jpg'
 
 interface AvatarProps {
     userId:string,
@@ -24,7 +25,7 @@ export const Avatar:React.FC<AvatarProps>=({userId,isLarge,hasBorder})=>{
     return (
         <div className={`${hasBorder ?'border-4 border-black':''} ${isLarge ?'h-32':'h-12'} ${isLarge ?'w-32':'w-12'}  rouned-full hover:opacity-90 relative cursor-pointer  `}>
 
-     <Image fill style={{objectFit:'cover', borderRadius:"100%"}} alt="Avatar" onClick={onClick} src={fetchedUser?.profileImage || '/images.png'} />
+     <Image fill style={{objectFit:'cover', borderRadius:"100%"}} alt="Avatar" onClick={onClick} src={fetchedUser?.coverImage || image} />
         </div>
 
     )

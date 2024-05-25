@@ -7,6 +7,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Modal } from "../Modal";
+import { Input } from "../input";
 
 export const Editmodal = () => {   
 
@@ -15,9 +16,10 @@ export const Editmodal = () => {
     const {data:currentUser}=usecurrentUser();
     const {mutate:mutateFetchUser}=useUser(currentUser?.id);
     const editmodal=UserEditModal();
+    console.log('edit model user ',currentUser)
 
    
-    const [coverImage,setCoverImage]=useState('');
+    const [coverImage,setCoverImage]=useState<string|null>(null);
     const [name,setName]=useState('');
     const [username,setUsername]=useState('');
     const [bio,setBio]=useState('');
@@ -26,14 +28,14 @@ export const Editmodal = () => {
      useEffect(()=>{
         if(currentUser)
         {
-            setName(currentUser.name);
-            setUsername(currentUser.username);
-            setBio(currentUser.bio);
+            setName(currentUser?.name);
+            setUsername(currentUser?.username);
+            setBio(currentUser?.bio);
           
-            setCoverImage(currentUser.coverImage);
+            // setCoverImage(currentUser?.coverImage);
         }
 
-     },[currentUser])
+     },[currentUser?.name,currentUser?.username,currentUser?.bio])
 
      const [isLoading,setIsLoading]=useState(false);
 
@@ -41,11 +43,11 @@ export const Editmodal = () => {
         try {
            
             setIsLoading(true);
-            await axios.patch('/api/Edit',{
+            await axios.patch('/api/edit',{
                 name,
                 username,
                 bio,
-                coverImage
+                
 
             }
 
@@ -54,6 +56,7 @@ export const Editmodal = () => {
             toast.success('Updated')
 
             editmodal.onclose();
+          
             
 
 
@@ -61,6 +64,7 @@ export const Editmodal = () => {
         }
         catch(error)
         {  toast.error('An error occured');
+        console.log(error);
            
 
         }
@@ -70,10 +74,19 @@ export const Editmodal = () => {
 
     },[bio,name,username,coverImage,mutateFetchUser,editmodal])
 
+    const bodycontent=(
+        <div className="flex flex-col gap-4">
+            <Input placeholder="Name" onChange={(e)=>setName(e.target.value)} value={name} disabled={isLoading} />
+            <Input placeholder="Username" onChange={(e)=>setUsername(e.target.value)} value={username} disabled={isLoading} />
+            <Input placeholder="Bio" onChange={(e)=>setBio(e.target.value)} value={bio} disabled={isLoading} />
+
+        </div>
+    )
+
     return (
         <>
 
-        <Modal disabled={isLoading} isOpen={editmodal.isOpen} title="Edit your Profile" actionLabel="Save" onClose={editmodal.onclose} onSubmit={onsubmit}/>
+        <Modal disabled={isLoading} isOpen={editmodal.isOpen} title="Edit your Profile" actionLabel="Save" onClose={editmodal.onclose} onSubmit={onsubmit} body={bodycontent}/>
         </>
     )
 }

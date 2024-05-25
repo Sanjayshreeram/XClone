@@ -23,7 +23,7 @@ model User {
   emailVerified DateTime?
   image String?
   coverImage String?
-  profileUrl String?
+  profileImage String?
   password  String
   hashPassword String?
   createdAt DateTime @default(now())

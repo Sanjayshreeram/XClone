@@ -1,31 +1,36 @@
-import { NextApiRequest } from "next"
-import { getSession } from "next-auth/react"
-import prisma from "./prismadb"
+// libs/serverAuth.ts
 
-const serverAuth = async (req:NextApiRequest) => {
-   
-    const  session =await getSession({req});
-    if(!session?.user?.email){
-       throw new Error('Not signed in')
-    }
+import { NextApiRequest, NextApiResponse } from "next";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/pages/api/auth/[...nextauth]/authoptionsfile."
+import prisma from "./prismadb";
 
-    const currentUser=await prisma.user.findUnique({
-        where:{
-            email:session.user.email
-        }
-    })
+export const serverAuth = async (req: NextApiRequest,res:NextApiResponse) => {
+  console.log('Request body:', req.body);
 
-    if(!currentUser)
-        {
-            throw new Error('Not signed in')
+  // Fetch the session from the server
+  const session = await getServerSession(req,res, authOptions);
 
-        }
+  console.log('Session:', session);
 
-        return {currentUser}
+  // If there's no session or no email in the session, throw an error
+  if (!session?.user?.email) {
+    throw new Error('Not signed in user you are');
+  }
 
+  // Fetch the current user from the database using the email in the session
+  const currentUser = await prisma.user.findUnique({
+    where: {
+      email: session.user.email,
+    },
+  });
 
+  console.log('Current user in serverAuth is:', currentUser);
 
-}
+  // If the user is not found in the database, throw an error
+  if (!currentUser) {
+    throw new Error('Not signed in error man');
+  }
 
-export default serverAuth;
-
+  return {currentUser};
+};

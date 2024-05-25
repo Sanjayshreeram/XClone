@@ -1,19 +1,26 @@
-
-import serverAuth from '@/libs/serverAuth'
+import { serverAuth } from '@/libs/serverAuth'
 import {NextApiRequest,NextApiResponse} from 'next'
 import prisma from '@/libs/prismadb'
+import { usecurrentUser } from '@/components/hooks/UseCurrentUser'
+import { useUser } from '@/components/hooks/useUser'
+
 export default async function handler(req:NextApiRequest,res:NextApiResponse)
 {
-
-    if(req.method!=='PATCH')
+     console.log('called edit ')
+    if(req.method !=='PATCH')
     {
        
         return res.status(405).json({msg:`Method ${req.method} not allowed`})
     }
 
     try {
-        const {currentUser}=await serverAuth(req);
-        const {name,username,bio,coverImage}=req.body; 
+
+        console.log("body is ",req.body)
+         const currentUser=await serverAuth(req,res);
+         console.log('edit file current user is ',{currentUser})
+        const {name,username,bio}= req.body; 
+        // console.log('edit file current user is ',{currentUser})
+        console.log("body is ",req.body)
 
 
         if(!name || !username)
@@ -22,14 +29,15 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
         }
         const  updateduser=await prisma.user.update({
             where:{
-                id:currentUser.id
+               id:currentUser?.currentUser?.id  
             },
             data:{
                 name,
                 username,
                 bio,
-               
-                coverImage
+                
+                
+                
             }
 
         })
@@ -38,7 +46,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
 
     }
     catch(error)
-    {
+    {   console.log(error)
         res.status(405).end()
 
         

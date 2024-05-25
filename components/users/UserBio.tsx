@@ -46,7 +46,7 @@ const UserBio:React.FC<UserBioProps> = ({userId}) => {
           <p className='text-md text-neutral-500'>
             @{fetchedUser?.username}
           </p>
-          <div className='flex flex-col mt-4 '>
+          <div className='flex flex-col mt-4 text-white'>
             {fetchedUser?.bio}
             <div className='flex flex-row items-center gap-2 mt-4 text-neutral-500 '>
               <BiCalendar size={24}/>

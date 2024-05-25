@@ -1,5 +1,6 @@
 
 import { NextApiRequest,NextApiResponse } from "next";
+import prisma from "@/libs/prismadb"
 
 
 
@@ -10,13 +11,13 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse){
         }
 
         try{
-            const {userId}=req.query;
+            const {userId}=req.query; 
             if(!userId || typeof userId !=='string' )
                 {
                     throw new Error('Invalid Id')
                 }
 
-                const  existingUser=await prisma?.user.findUnique({
+                const  existingUser=await prisma.user.findUnique({
                     where:{
                         id:userId
                     }
@@ -36,7 +37,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse){
 
         catch(error)
         {
-            return res.status(400).end( )
+            return res.status(400).end()
         }
 
 }
