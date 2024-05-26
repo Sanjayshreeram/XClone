@@ -8,21 +8,24 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { Modal } from "../Modal";
 import { Input } from "../input";
+import { ImageUpload } from "../ImageUpload";
+import { profile } from "console";
 
 export const Editmodal = () => {   
 
-    console.log('Editmodal')
+   
 
     const {data:currentUser}=usecurrentUser();
     const {mutate:mutateFetchUser}=useUser(currentUser?.id);
     const editmodal=UserEditModal();
-    console.log('edit model user ',currentUser)
+   
 
    
-    const [coverImage,setCoverImage]=useState<string|null>(null);
+    const [coverImage,setCoverImage]=useState("");
     const [name,setName]=useState('');
     const [username,setUsername]=useState('');
     const [bio,setBio]=useState('');
+    const [ProfileImage,setProfileImage]=useState("");
 
 
      useEffect(()=>{
@@ -31,11 +34,12 @@ export const Editmodal = () => {
             setName(currentUser?.name);
             setUsername(currentUser?.username);
             setBio(currentUser?.bio);
+            setProfileImage(currentUser?.profileImage); 
           
-            // setCoverImage(currentUser?.coverImage);
+            setCoverImage(currentUser?.coverImage);
         }
 
-     },[currentUser?.name,currentUser?.username,currentUser?.bio])
+     },[currentUser?.name,currentUser?.username,currentUser?.bio,currentUser?.profileImage,currentUser?.coverImage])
 
      const [isLoading,setIsLoading]=useState(false);
 
@@ -47,6 +51,8 @@ export const Editmodal = () => {
                 name,
                 username,
                 bio,
+                ProfileImage,
+                coverImage
                 
 
             }
@@ -76,9 +82,12 @@ export const Editmodal = () => {
 
     const bodycontent=(
         <div className="flex flex-col gap-4">
+            <ImageUpload value={ProfileImage} label='Upload profile image' disabled={isLoading}  onChange={(image)=>setProfileImage(image)} />
+            <ImageUpload value={coverImage || undefined} label='Upload coverImage' disabled={isLoading}  onChange={(image)=>setCoverImage(image)} />
             <Input placeholder="Name" onChange={(e)=>setName(e.target.value)} value={name} disabled={isLoading} />
             <Input placeholder="Username" onChange={(e)=>setUsername(e.target.value)} value={username} disabled={isLoading} />
             <Input placeholder="Bio" onChange={(e)=>setBio(e.target.value)} value={bio} disabled={isLoading} />
+
 
         </div>
     )

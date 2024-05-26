@@ -13,62 +13,57 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  email     String   @unique
-  name      String?
-  username  String?  @unique
-  bio String?
-  emailVerified DateTime?
-  image String?
-  coverImage String?
-  profileImage String?
-  password  String
-  hashPassword String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  followingIds String[] @db.ObjectId
+  id               String          @id @default(auto()) @map("_id") @db.ObjectId
+  email            String          @unique
+  name             String?
+  username         String?         @unique
+  bio              String?
+  emailVerified    DateTime?
+  image            String?
+  coverImage       String?
+  profileImage     String?
+  password         String
+  hashPassword     String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  followingIds     String[]        @db.ObjectId
   hasNotifications Boolean?
-  posts    Post[]
-  comments Comment[]
-  notifications Notifications[]
-
-
-} 
+  posts            Post[]
+  comments         Comment[]
+  notifications    Notifications[]
+}
 
 model Post {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
   body String
-  
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-   userId  String  @db.ObjectId   //here objectid means it will 
-  user    User     @relation(fields: [userId], references: [id],onDelete: Cascade)    //when user is deleted post also will be deleted using cascade
- 
-  comments  Comment[]
-  likedIds    String[] @db.ObjectId
+  userId    String   @db.ObjectId //here objectid means it will 
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) //when user is deleted post also will be deleted using cascade
+
+  comments Comment[]
+  likedIds String[]  @db.ObjectId
 }
 
 model Comment {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  body     String
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  body      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-   userId   String  @db.ObjectId
-  user    User     @relation(fields: [userId], references: [id],onDelete: Cascade)    //when user is deleted comment also will be deleted using cascade
- 
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) //when user is deleted comment also will be deleted using cascade
 
-  postId   String @db.ObjectId  //here objectid means  it will 
-  post     Post     @relation(fields: [postId], references: [id])
+  postId String @db.ObjectId //here objectid means  it will 
+  post   Post   @relation(fields: [postId], references: [id])
 }
 
 model Notifications {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  body     String
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  body      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-    userId   String  @db.ObjectId  //here userid id is refernced with user id
-  user    User     @relation(fields: [userId], references: [id],onDelete: Cascade)    //when user is deleted comment also will be deleted using cascade
-
+  userId    String   @db.ObjectId //here userid id is refernced with user id
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) //when user is deleted comment also will be deleted using cascade
 }

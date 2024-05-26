@@ -6,7 +6,7 @@ import { useUser } from '@/components/hooks/useUser'
 
 export default async function handler(req:NextApiRequest,res:NextApiResponse)
 {
-     console.log('called edit ')
+   
     if(req.method !=='PATCH')
     {
        
@@ -15,12 +15,12 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
 
     try {
 
-        console.log("body is ",req.body)
          const currentUser=await serverAuth(req,res);
-         console.log('edit file current user is ',{currentUser})
-        const {name,username,bio}= req.body; 
+         
+        const {name,username,bio, profileImage,coverImage}= req.body; 
         // console.log('edit file current user is ',{currentUser})
-        console.log("body is ",req.body)
+        console.log("bosy is ",req.body)
+       
 
 
         if(!name || !username)
@@ -35,6 +35,8 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
                 name,
                 username,
                 bio,
+                profileImage:profileImage?profileImage:undefined,
+                coverImage
                 
                 
                 
