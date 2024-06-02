@@ -8,7 +8,7 @@ import prisma from "./prismadb";
 export const serverAuth = async (req: NextApiRequest,res:NextApiResponse) => {
   console.log('Request body:', req.body);
 
-  // Fetch the session from the server
+  // Fetch the session from the server (i.e it validates the cookie)
   const session = await getServerSession(req,res, authOptions);
 
   console.log('Session:', session);

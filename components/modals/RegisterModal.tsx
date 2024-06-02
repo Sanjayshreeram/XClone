@@ -31,9 +31,10 @@ const RegitserModal = () => {
 
     // if(currentUser)
     //     {     registermodal.onclose();
+            
 
     //     }
-    //if the user is already logged in then the register modal will be closed;
+    // if the user is already logged in then the register modal will be closed;
 
 
     const onsubmit =useCallback(async()=>{
