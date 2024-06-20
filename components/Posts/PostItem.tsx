@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
 import React, { useCallback, useMemo } from 'react'
-impor UserLoginModal
+
 import { usecurrentUser } from '../hooks/UseCurrentUser';
 import { UserLoginModal } from '../hooks/UserLoginModal';
 import { formatDistanceStrict, formatDistanceToNowStrict } from 'date-fns';
+import { Avatar } from '../Avatar';
 
 interface  PostItemProps {
 
@@ -58,6 +59,22 @@ const PostItem:React.FC<PostItemProps> = ({data,userId}) => {
 
   return (
    <>
+   <div onClick={goTopost} className='border-b-[1px] border-neutral-800 p-5 cursor-pointer hover-bg-neutarl-900 transition'>
+     <div className='flex flex-row items-start gap-3 '>
+        <Avatar userId={data.user.id}/>
+        <div>
+            <div className='flex flex-row  items-center  gap-2'>
+                <p className='font-bold text-white'>
+                    {data.user.name}    
+                </p>
+
+            </div>
+
+            </div>
+
+     </div>
+
+    </div>
 
    
    </>
