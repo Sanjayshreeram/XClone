@@ -15,7 +15,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
                 {
 
                     const currentUser=await serverAuth(req,res);
-                    const{body}=req.body;
+                    const{body}=req.body;  //this body refers to schema in post . post conent body
         
                     const post=await prisma.post.create({
                         data:{
@@ -56,6 +56,9 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
                                 include:{
                                     user:true,
                                     comments:true
+                                },
+                                orderBy:{
+                                    createdAt:'desc'
                                 }
                             })
                         }
