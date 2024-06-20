@@ -20,7 +20,7 @@ const From:React.FC<FromProps> = ({placeholder,isComment,postId}) => {
     const loginModal=UserLoginModal();
 
     const {data:currentUser}=usecurrentUser();
-    const {mutate:mutatePost}=UsePosts(postId);
+    const {mutate:mutatePost}=UsePosts();
 
     const [body,setBody]=React.useState("");
     const [isLoading,setIsLoading]=React.useState(false);

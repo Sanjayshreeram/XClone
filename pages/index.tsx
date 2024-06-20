@@ -7,7 +7,7 @@ export default function Home() {
    <>
    <Header label="HOME" showBackArrow />
    <Form placeholder="What's happening"/>
-   <PostFeed/>
+   <PostFeed />
    </>
   );
 }

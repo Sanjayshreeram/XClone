@@ -5,7 +5,8 @@ import {fetcher} from '@/libs/fetcher'
 
 
 export const UsePosts= (userId?:string)=>{
-    const url=userId?`/api/posts?userId=${userId}`:`/api/posts`
+    //generate post based on userid and also all public post if no user id is provided
+    const url=userId?`/api/posts?userId=${userId}` : `/api/posts`
 
     const {data,error,isLoading,mutate}=  useSWR(url,fetcher);
     return {
@@ -16,3 +17,4 @@ export const UsePosts= (userId?:string)=>{
     }
 }
 
+  
