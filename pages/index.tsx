@@ -7,7 +7,7 @@ export default function Home() {
    <>
    <Header label="HOME" showBackArrow />
    <Form placeholder="What's happening"/>
-   <PostFeed />
+   <PostFeed />   //just without user in home page to generate all tweets // when passed with user id generate post of that user
    </>
   );
 }

@@ -5,6 +5,7 @@ import { usecurrentUser } from '../hooks/UseCurrentUser';
 import { UserLoginModal } from '../hooks/UserLoginModal';
 import { formatDistanceStrict, formatDistanceToNowStrict } from 'date-fns';
 import { Avatar } from '../Avatar';
+import { AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
 
 interface  PostItemProps {
 
@@ -64,13 +65,41 @@ const PostItem:React.FC<PostItemProps> = ({data,userId}) => {
         <Avatar userId={data.user.id}/>
         <div>
             <div className='flex flex-row  items-center  gap-2'>
-                <p className='font-bold text-white'>
+                <p className='font-semibold text-white cursor-pointer hover:underline' onClick={goToUser}>
                     {data.user.name}    
                 </p>
+                <span className=' text-neutral-500 md:block hidden'>
+                    @{data.user.username}
+                </span>
+                <span className='text-neutral-500 text-sm'>
+                    {createdAt} ago
+                </span>
 
+            </div>
+            <div className='text-white mt-1'>
+                {data.body}
+
+            </div>
+            <div className='flex flex-row items-center mt-3 gap-10'>
+
+                <div className='flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-sky-500'>
+                    <AiOutlineMessage size={20}/>
+                  <p>
+                    {data.comments?.length || 0}
+                    </p>
+                </div>
+                <div className='flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-red-500' onClick={onLike}>
+                    <AiOutlineHeart size={20} />
+                  <p>
+                    {data.comments?.length || 0}
+                    </p>
+                </div>
+            
+                    
             </div>
 
             </div>
+            
 
      </div>
 
