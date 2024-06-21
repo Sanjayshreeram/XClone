@@ -37,10 +37,10 @@ export default async  function  handler(req:NextApiRequest,res:NextApiResponse){
                 }
 
             if(req.method==='DELETE')
-               updatedFollowIds=updatedFollowIds.filter((s)=>(
+             {  updatedFollowIds=updatedFollowIds.filter((s)=>(
                  s!=userId
             
-               ))
+               ))}
 
                const updatedUser=await prisma.user.update({
 
