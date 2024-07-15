@@ -9,7 +9,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
             return res.status(405).end()
         }
 
-        console.log('current api body',req.body)
+        // console.log('current api body',req.body)
 
         try{
             const currentUser=await serverAuth(req,res);

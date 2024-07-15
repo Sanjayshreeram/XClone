@@ -19,7 +19,7 @@ const UserFollow = (userId:string) => {
 
  },[userId,currentUser?.followingIds])
 
-     const toggleFollow=useCallback(()=>{
+     const toggleFollow=useCallback(async()=>{
         if(!currentUser)
             return loginmodal.onopen();
 
@@ -38,6 +38,10 @@ const UserFollow = (userId:string) => {
                     })
 
                 }
+                await request();
+                mutateCurrentUser();
+                mutateFetchUser();
+                toast.success(isFollowing?'Unfollowed':'Followed');
 
 
             
@@ -51,14 +55,17 @@ const UserFollow = (userId:string) => {
 
 
 
-     },[])
+     },[currentUser,isFollowing,userId,mutateCurrentUser,mutateFetchUser,loginmodal])
 
 
 
 
-  return (
-    <div>UserFollow</div>
-  )
+  return {
+    isFollowing,
+    toggleFollow
+
+  }
+  
 }
 
-export default UserFollow
+export default UserFollow;1

@@ -32,7 +32,7 @@ const PostItem:React.FC<PostItemProps> = ({data,userId}) => {
     const goTopost=useCallback((event:any)=>{
         event.stopPropagation();        //stop propgation will prevent from going to post page
 
-         router.push(`/post/${data.id}`)                             
+         router.push(`/posts/${data.id}`)                             
 
     }
     ,[router,data.id])

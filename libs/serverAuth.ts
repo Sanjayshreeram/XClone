@@ -6,12 +6,12 @@ import { authOptions } from "@/app/authoptionsfile."
 import prisma from "./prismadb";
 
 export const serverAuth = async (req: NextApiRequest,res:NextApiResponse) => {
-  console.log('Request body:', req.body);
+  // console.log('Request body:', req.body);
 
   // Fetch the session from the server (i.e it validates the cookie)
   const session = await getServerSession(req,res, authOptions);
 
-  console.log('Session:', session);
+  // console.log('Session:', session);
 
   // If there's no session or no email in the session, throw an error
   if (!session?.user?.email) {
@@ -25,7 +25,7 @@ export const serverAuth = async (req: NextApiRequest,res:NextApiResponse) => {
     },
   });
 
-  console.log('Current user in serverAuth is:', currentUser);
+  // console.log('Current user in serverAuth is:', currentUser);
 
   // If the user is not found in the database, throw an error
   if (!currentUser) {

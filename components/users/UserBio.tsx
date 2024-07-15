@@ -9,8 +9,9 @@ import { useMemo } from 'react'
 import Button from '../Button'
 import { BiCalendar } from 'react-icons/bi'
 import { UserEditModal } from '../hooks/UserEditModal'
+import UserFollow from '../hooks/UserFollow'
 
-interface  UserBioProps {
+interface  UserBioProps { 
 
     userId:string
 
@@ -19,6 +20,7 @@ interface  UserBioProps {
 const UserBio:React.FC<UserBioProps> = ({userId}) => {
     const {data:currentUser}=usecurrentUser();
     const {data:fetchedUser}=useUser(userId);
+    const {isFollowing,toggleFollow}=UserFollow(userId);
 
     const editmodal=UserEditModal();
 
@@ -34,7 +36,7 @@ const UserBio:React.FC<UserBioProps> = ({userId}) => {
     <div className='border-b-[1px] border-neutral-800 pb-4'>
       <div className='flex  justify-end p-2'>
         {currentUser?.id===userId ?(<Button secondary label='Edit'  onClick={()=>{editmodal.onopen()}} />):(
-          <Button label='Follow' secondary />
+          <Button onClick={toggleFollow} label={isFollowing ? 'Unfollow':'follow'} secondary={!isFollowing} outline={isFollowing} />
         )}
 
       </div>
@@ -64,7 +66,7 @@ const UserBio:React.FC<UserBioProps> = ({userId}) => {
 
            </p>
            <p className='text-neutral-500'>
-            Follwing
+           Followers
 
            </p>
             </div>
@@ -75,7 +77,7 @@ const UserBio:React.FC<UserBioProps> = ({userId}) => {
 
            </p>
            <p className='text-neutral-500'>
-            Follwers
+            Following
 
            </p>
             </div>
