@@ -14,6 +14,7 @@ interface  PostItemProps {
 }
 
 const PostItem:React.FC<PostItemProps> = ({data,userId}) => {
+    console.log("data us ",data)
 
     //data is user data array 
     const router=useRouter();
@@ -24,15 +25,15 @@ const PostItem:React.FC<PostItemProps> = ({data,userId}) => {
     const goToUser=useCallback((event:any)=>{
         event.stopPropagation();        //stop propgation will prevent from going to post page
 
-         router.push(`/user/${data.user.id}`)                             
+         router.push(`/user/${data?.user?.id}`)                             
 
-    },[router,data.user.id])
+    },[router,data?.user?.id])
 
 
     const goTopost=useCallback((event:any)=>{
         event.stopPropagation();        //stop propgation will prevent from going to post page
 
-         router.push(`/posts/${data.id}`)                             
+         router.push(`/posts/${data?.id}`)                             
 
     }
     ,[router,data.id])
@@ -62,14 +63,14 @@ const PostItem:React.FC<PostItemProps> = ({data,userId}) => {
    <>
    <div onClick={goTopost} className='border-b-[1px] border-neutral-800 p-5 cursor-pointer hover-bg-neutarl-900 transition'>
      <div className='flex flex-row items-start gap-3 '>
-        <Avatar userId={data.user.id}/>
+        <Avatar userId={data?.user?.id}/>
         <div>
             <div className='flex flex-row  items-center  gap-2'>
                 <p className='font-semibold text-white cursor-pointer hover:underline' onClick={goToUser}>
-                    {data.user.name}    
+                    {data.user?.body}    
                 </p>
                 <span className=' text-neutral-500 md:block hidden'>
-                    @{data.user.username}
+                    @{data.user?.username}
                 </span>
                 <span className='text-neutral-500 text-sm'>
                     {createdAt} ago

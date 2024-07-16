@@ -1,14 +1,16 @@
 import Header from '@/components/Header';
 import { UsePost } from '@/components/hooks/Usepost';
+import PostItem from '@/components/Posts/PostItem';
 import { useRouter } from 'next/router'
 import React from 'react'
 import { ClipLoader } from 'react-spinners';
 
- const postview = () => {
+ const Postview = () => {
     const router=useRouter();
     const {postId}=router.query;
 
     const {data:fetchedPost,isLoading}=UsePost(postId as string);
+    console.log(fetchedPost)
   
 
     if(isLoading || !fetchedPost)
@@ -25,11 +27,12 @@ import { ClipLoader } from 'react-spinners';
 
     return (<>
     <Header label='Tweet'  showBackArrow/>
+    <PostItem  data={fetchedPost} />
 
     
     </>)
   
 }
 
-export default postview
+export default Postview
 
