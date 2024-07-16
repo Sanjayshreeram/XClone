@@ -4,6 +4,7 @@ import PostItem from '@/components/Posts/PostItem';
 import { useRouter } from 'next/router'
 import React from 'react'
 import { ClipLoader } from 'react-spinners';
+import Form from '@/components/From'
 
  const Postview = () => {
     const router=useRouter();
@@ -28,6 +29,7 @@ import { ClipLoader } from 'react-spinners';
     return (<>
     <Header label='Tweet'  showBackArrow/>
     <PostItem  data={fetchedPost} />
+    <Form placeholder='Tweet your reply'/>
 
     
     </>)
